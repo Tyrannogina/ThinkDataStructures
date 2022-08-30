@@ -71,7 +71,6 @@ public class WikiFetcher {
 			long nextRequestTime = lastRequestTime + minInterval;
 			if (currentTime < nextRequestTime) {
 				try {
-					//System.out.println("Sleeping until " + nextRequestTime);
 					Thread.sleep(nextRequestTime - currentTime);
 				} catch (InterruptedException e) {
 					System.err.println("Warning: sleep interrupted in fetchWikipedia.");
