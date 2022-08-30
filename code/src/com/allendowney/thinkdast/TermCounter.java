@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.Collection;
 
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 /**
- * Encapsulates a map from search term to frequency (count).
+ * Encapsulates a mapping from search terms to frequency (count) on a page.
  *
  * @author downey
  *
@@ -32,11 +33,11 @@ public class TermCounter {
   /**
    * Returns the total of all counts.
    *
-   * @return
+   * @return int of all the words counted
    */
   public int size() {
-    // TODO: FILL THIS IN!
-    return 0;
+    Collection<Integer> counts = map.values();
+    return counts.stream().reduce(0, (size, count) -> size + count);
   }
 
   /**
@@ -66,12 +67,12 @@ public class TermCounter {
   }
 
   /**
-   * Splits `text` into words and counts them.
+   * Splits "text" into words and counts them.
    *
    * @param text The text to process.
    */
   public void processText(String text) {
-    // replace punctuation with spaces, convert to lower case, and split on
+    // Replace punctuation with spaces, convert to lower case, and split on
     // whitespace
     String[] array = text.replaceAll("\\pP", " ").toLowerCase().split("\\s+");
 
@@ -87,7 +88,6 @@ public class TermCounter {
    * @param term
    */
   public void incrementTermCount(String term) {
-    // System.out.println(term);
     put(term, get(term) + 1);
   }
 
@@ -141,7 +141,6 @@ public class TermCounter {
 
     WikiFetcher wf = new WikiFetcher();
     Elements paragraphs = wf.fetchWikipedia(url);
-
     TermCounter counter = new TermCounter(url.toString());
     counter.processElements(paragraphs);
     counter.printCounts();

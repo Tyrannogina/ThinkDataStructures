@@ -27,12 +27,12 @@ public class Index {
   public void add(String term, TermCounter tc) {
     Set<TermCounter> set = get(term);
 
-    // if we're seeing a term for the first time, make a new Set
+    // If we're seeing a term for the first time, make a new Set
     if (set == null) {
       set = new HashSet<TermCounter>();
       index.put(term, set);
     }
-    // otherwise we can modify an existing Set
+    // Otherwise we can modify an existing Set
     set.add(tc);
   }
 
@@ -54,7 +54,7 @@ public class Index {
     for (String term : keySet()) {
       System.out.println(term);
 
-      // for each term, print the pages where it appears
+      // For each term, print the pages where it appears
       Set<TermCounter> tcs = get(term);
       for (TermCounter tc : tcs) {
         Integer count = tc.get(term);
@@ -79,11 +79,12 @@ public class Index {
    * @param paragraphs Collection of elements that should be indexed.
    */
   public void indexPage(String url, Elements paragraphs) {
-    // TODO: Your code here
+    TermCounter counter = new TermCounter(url);
+    counter.processElements(paragraphs);
 
-    // make a TermCounter and count the terms in the paragraphs
-
-    // for each term in the TermCounter, add the TermCounter to the index
+    for (String key : counter.keySet()) {
+      add(key, counter);
+    }
   }
 
   /**
