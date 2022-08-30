@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.allendowney.thinkdast;
 
 import java.util.Arrays;
@@ -20,16 +18,16 @@ public class SillyArray {
 	public String toString() {
 		return Arrays.toString(array);
 	}
-	
+
 	public void setChar(int i, char c) {
 		this.array[i] = c;
 	}
-	
+
 	@Override
 	public boolean equals(Object other) {
 		return this.toString().equals(other.toString());
 	}
-	
+
 	@Override
 	public int hashCode() {
 		int total = 0;
@@ -39,7 +37,7 @@ public class SillyArray {
 		System.out.println(total);
 		return total;
 	}
-	
+
 	/**
 	 * @param args
 	 */
@@ -51,10 +49,10 @@ public class SillyArray {
 
 		// what happens if we mutate a key while it's in the Map?
 		array1.setChar(0, 'C');
-		
+
 		Integer value = map.get(array1);
 		System.out.println(value);
-		
+
 		for (SillyArray key: map.keySet()) {
 			System.out.println(key + ", " + map.get(key));
 		}

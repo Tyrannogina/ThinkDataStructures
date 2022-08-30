@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.allendowney.thinkdast;
 
 import java.util.Arrays;
@@ -84,7 +81,7 @@ public class MyLinkedList<E> implements List<E> {
   }
 
   @Override
-	public void add(int index, E element) {
+  public void add(int index, E element) {
     if (index == 0) {
       head = new Node(element, head);
     } else {
@@ -92,7 +89,7 @@ public class MyLinkedList<E> implements List<E> {
       previousNode.next = new Node(element, previousNode.next);
     }
     size++;
-	}
+  }
 
   @Override
   public boolean addAll(Collection<? extends E> collection) {
@@ -180,7 +177,7 @@ public class MyLinkedList<E> implements List<E> {
    * Handles the special case that the target is null.
    *
    * @param target
-   * @param object
+   * @param element
    */
   private boolean equals(Object target, Object element) {
     if (target == null) {

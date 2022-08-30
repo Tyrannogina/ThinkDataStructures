@@ -128,8 +128,7 @@ public class MyArrayList<T> implements List<T> {
    *
    * @param target element to search for
    * @return the index of the first occurrence of the specified element in this
-   *         list, or -1 if this
-   *         list does not contain the element
+   *         list, or -1 if this list does not contain the element
    */
   @Override
   public int indexOf(Object target) {

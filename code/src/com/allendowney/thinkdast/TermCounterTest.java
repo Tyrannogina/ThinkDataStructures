@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.allendowney.thinkdast;
 
 import static org.junit.Assert.*;
@@ -24,10 +22,10 @@ public class TermCounterTest {
 	@Before
 	public void setUp() throws Exception {
 		String url = "https://en.wikipedia.org/wiki/Java_(programming_language)";
-		
+
 		WikiFetcher wf = new WikiFetcher();
 		Elements paragraphs = wf.readWikipedia(url);
-		
+
 		counter = new TermCounter(url.toString());
 		counter.processElements(paragraphs);
 	}
