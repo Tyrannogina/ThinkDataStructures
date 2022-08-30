@@ -12,8 +12,8 @@ import java.util.Set;
  * operations are linear time.
  *
  * @author downey
- * @param <K>
- * @param <V>
+ * @param <K> type of the keys
+ * @param <V> type of the values
  *
  */
 public class MyLinearMap<K, V> implements Map<K, V> {
@@ -62,8 +62,25 @@ public class MyLinearMap<K, V> implements Map<K, V> {
    * @param target
    */
   private Entry findEntry(Object target) {
-    // TODO: FILL THIS IN!
+    int indexOfEntry = indexOf(target);
+    if (indexOfEntry >= 0) {
+      return entries.get(indexOfEntry);
+    }
     return null;
+  }
+
+  /**
+   * Returns the index of the entry that contains the target key, or -1 if there is none.
+   *
+   * @param target
+   */
+  private int indexOf(Object target) {
+    for (int i = 0; i < entries.size(); i++) {
+      if (equals(entries.get(i).getKey(), target)) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   /**
@@ -95,10 +112,29 @@ public class MyLinearMap<K, V> implements Map<K, V> {
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * Returns the value to which the specified key is mapped, or null if this map
+   * contains no
+   * mapping for the key.
+   * More formally, if this map contains a mapping from a key k to a value v such
+   * that
+   * (key==null ? k==null : key.equals(k)), then this method returns v; otherwise
+   * it returns null.
+   * (There can be at most one such mapping.)
+   *
+   * @param key the key whose associated value is to be returned
+   * @return the value to which the specified key is mapped, or null if this map
+   *         contains no
+   *         mapping for the key
+   *
+   */
   @Override
   public V get(Object key) {
-    // TODO: FILL THIS IN!
-    return null;
+    Entry entry = findEntry(key);
+    if (entry == null) {
+      return null;
+    }
+    return entry.getValue();
   }
 
   @Override
@@ -117,7 +153,15 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 
   @Override
   public V put(K key, V value) {
-    // TODO: FILL THIS IN!
+    Entry entry = findEntry(key);
+
+    if (entry instanceof MyLinearMap.Entry) {
+      V previousValue = entry.getValue();
+      entry.setValue(value);
+      return previousValue;
+    }
+
+    entries.add(new Entry(key, value));
     return null;
   }
 
@@ -128,9 +172,30 @@ public class MyLinearMap<K, V> implements Map<K, V> {
     }
   }
 
+  /**
+   * Removes the mapping for a key from this map if it is present. More formally,
+   * if this map contains a mapping from key k to value v such that
+   * (key==null ? k==null : key.equals(k)), that mapping is removed.
+   * (The map can contain at most one such mapping.)
+   *
+   * Returns the value to which this map previously associated the key, or null if
+   * the map contained no mapping for the key.
+   *
+   * The map will not contain a mapping for the specified key once the call
+   * returns.
+   *
+   * @param key - key whose mapping is to be removed from the map
+   * @return the previous value associated with key, or null if there was no mapping for
+   * key.
+   */
   @Override
   public V remove(Object key) {
-    // TODO: FILL THIS IN!
+    int entryIndex = indexOf(key);
+    if (entryIndex >= 0) {
+      V previousValue = entries.get(entryIndex).getValue();
+      entries.remove(entryIndex);
+      return previousValue;
+    }
     return null;
   }
 
