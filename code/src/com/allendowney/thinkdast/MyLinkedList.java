@@ -164,23 +164,14 @@ public class MyLinkedList<E> implements List<E> {
    */
   @Override
   public int indexOf(Object target) {
-    // TODO(luis): Why doesn't this work?
-    // int index = 0;
-    // for (Node node = head; node.next == null; node = node.next) {
-    //   if (equals(target, node.data)) {
-    //     return index;
-    //   }
-    //   index++;
-    // }
-    // return -1;
-    Node node = head;
-		for (int i = 0; i < size; i++) {
-			if (equals(target, node.data)) {
-				return i;
-			}
-			node = node.next;
-		}
-		return -1;
+    int index = 0;
+    for (Node node = head; node != null; node = node.next) {
+      if (equals(target, node.data)) {
+        return index;
+      }
+      index++;
+    }
+    return -1;
   }
 
   /**
