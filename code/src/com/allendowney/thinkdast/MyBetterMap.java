@@ -23,7 +23,6 @@ public class MyBetterMap<K, V> implements Map<K, V> {
 
   /**
    * Initialize the map with 2 sub-maps.
-   *
    */
   public MyBetterMap() {
     makeMaps(2);
@@ -32,13 +31,17 @@ public class MyBetterMap<K, V> implements Map<K, V> {
   /**
    * Makes a collection of `k` MyLinearMap
    *
-   * @param k
+   * @param k number of MyLinearMap in maps
    */
   protected void makeMaps(int k) {
     maps = new ArrayList<MyLinearMap<K, V>>(k);
     for (int i = 0; i < k; i++) {
       maps.add(new MyLinearMap<K, V>());
     }
+  }
+
+  public List<MyLinearMap<K, V>> getMaps() {
+    return maps;
   }
 
   @Override
@@ -123,7 +126,7 @@ public class MyBetterMap<K, V> implements Map<K, V> {
 
   @Override
   public int size() {
-    // add up the sizes of the sub-maps
+    // Add up the sizes of the sub-maps
     int total = 0;
     for (MyLinearMap<K, V> map : maps) {
       total += map.size();
